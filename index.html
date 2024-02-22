@@ -1,1 +1,87 @@
 
+<!--
+git add * 
+git commit -m "your commit message here should be helpful"
+git push 
+
+git checkout -b gh-pages         // create the new branch gh-pages
+git status 
+git merge main
+git push --set-upstream origin gh-pages   // to do only the first time you push to a new branch otherwise just `git push` will do
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Tracker App</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+            <button class="tab" id="leagues-tab">Leagues</button>
+            <button class="tab" id="new-game-tab">New Game</button>
+            <button class="tab" id="statistics-tab">Statistics</button>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Leagues Tab Content -->
+            <div id="leagues-content" class="tab-content">
+                <!-- List of Leagues -->
+                <div class="league-list">
+                    <!-- Individual League -->
+                    <!-- Repeat this structure for each league -->
+                    <div class="league">
+                        <h2>League Name</h2>
+                        <!-- List of Players and Wins -->
+                        <ul class="player-list">
+                            <!-- Player Entry -->
+                            <!-- Repeat this structure for each player in the league -->
+                            <li>Player Name - Wins: 10</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Add New League Button -->
+                <button id="add-league-btn">Add New League</button>
+            </div>
+            
+            <!-- New Game Tab Content -->
+            <div id="new-game-content" class="tab-content">
+                <!-- Form for entering new game details -->
+                <form id="new-game-form">
+                    <label for="league-select">Select League:</label>
+                    <select id="league-select">
+                        <!-- Populate options dynamically using JavaScript -->
+                    </select>
+                    <label for="player-select">Select Player:</label>
+                    <select id="player-select">
+                        <!-- Populate options dynamically using JavaScript -->
+                    </select>
+                    <label for="winner-select">Select Winner:</label>
+                    <select id="winner-select">
+                        <!-- Populate options dynamically using JavaScript -->
+                    </select>
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+            
+            <!-- Statistics Tab Content -->
+            <div id="statistics-content" class="tab-content">
+                <!-- Statistics Display -->
+                <!-- Allow users to view statistics for leagues and players -->
+                <div id="league-stats">
+                    <!-- Display league statistics -->
+                </div>
+                <div id="player-stats">
+                    <!-- Display player statistics -->
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
