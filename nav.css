@@ -82,28 +82,6 @@ body {
     font-size: 24px;
 }
 
-:root{
-    --ff-sans: 'Poppins', sans-serif;
-    --fw-medium: 500;
-    --fw-bold: 600;
-
-    --fs-400: 1rem;
-    --fs-500: 1.25rem;
-    --fs-900: 2.5rem;
-}
-
-.poppins-medium {
-    font-family: "Poppins", sans-serif;
-    font-weight: 500;
-    font-style: normal;
-}
-  
-.poppins-semibold {
-    font-family: "Poppins", sans-serif;
-    font-weight: 600;
-    font-style: normal;
-}
-
 .add-league-button {
     position: fixed;
     bottom: 20px;
@@ -142,6 +120,7 @@ body {
 }
 
 .nlcontainer form input[type="text"] {
+    font-family: Futura, Trebuchet MS;
     margin: 0px;
     margin-bottom: 15px;
     padding: 5px;
@@ -150,12 +129,17 @@ body {
 
 
 .league-block {
+    font-family: Futura, Trebuchet MS;
     border: 1px solid #333333;
     margin: 10px;
     padding: 10px;
     cursor: pointer;
     border-radius: 10px;
 }
+.league-block:hover {
+    background-color: #eeeeee;
+}
+
 button {
     background-color: #009578;
     color: white;

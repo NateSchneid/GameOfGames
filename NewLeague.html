@@ -54,7 +54,7 @@
                 // Retrieve existing leagues from local storage
                 const storedLeagues = JSON.parse(localStorage.getItem('leagues')) || [];
                 // Add new league data
-                storedLeagues.push({ name: leagueName, players: players });
+                storedLeagues.push({ name: leagueName, players: players, games: 0 });
                 // Save updated leagues back to local storage
                 localStorage.setItem('leagues', JSON.stringify(storedLeagues));
                 // Redirect to Leagues page

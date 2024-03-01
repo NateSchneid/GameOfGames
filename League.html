@@ -26,7 +26,7 @@
             <span class="nav__text">Stats</span>
         </a>
     </nav>
-    <a href="Newleague.html" class="add-league-button">
+    <a href="NewLeague.html" class="add-league-button">
         <span class="material-icons">add</span>
     </a>
 
@@ -47,7 +47,7 @@
                 // Add click event listener to league block
                 leagueBlock.addEventListener('click', function () {
                     // Create alert with list of player names
-                    alert('Players: ' + leagueData.players.join(', '));
+                    alert('Players: ' + leagueData.players.join(', ') + '\nGames Played: ' + leagueData.games);
                 });
             });
         });
