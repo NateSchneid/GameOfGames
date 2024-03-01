@@ -158,8 +158,23 @@ button:hover {
 .scontainer{
     font-family: Futura, Trebuchet MS;
     border: 2px solid #333333;
+    align-items: center;
+    display: flex;
+    flex-direction: column;
     border-radius: 10px;
     margin: auto;
-    width: 50%;
+    width: 90%;
     padding: 10px;
+}
+
+#pie-chart-container {
+    position: relative;
+    width: 50%;
+    height: same-as-width;
+    margin: 0 auto; 
+}
+#pie-chart {
+    position: absolute;
+    top: 0;
+    left: 0;
 }

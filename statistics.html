@@ -36,8 +36,13 @@
                 <!-- JavaScript magic-->
             </select>
         </div>
-        <canvas id="pie-chart" width="400" height="400"></canvas>
     </div>
+    <div id="pie-chart-container">
+        <canvas id="pie-chart" width=50% height=same-as-width></canvas>
+    </div>
+
+    
+
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             const storedLeagues = JSON.parse(localStorage.getItem('leagues')) || [];
