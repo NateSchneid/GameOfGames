@@ -26,5 +26,62 @@
             <span class="nav__text">Stats</span>
         </a>
     </nav>
+    <div class="nlcontainer">
+        <div class="custom-select">
+            <select id="league-select">
+                <option value="">Select a League</option>
+                <!-- JavaScript will add options here -->
+            </select>
+        </div>
+        <div class="custom-select">
+            <select id="player-select">
+                <option value="">Select a Winner</option>
+                <!-- JavaScript will add options here -->
+            </select>
+        </div>
+        <button type="button" id="submit-button">Submit</button>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const storedLeagues = JSON.parse(localStorage.getItem('leagues')) || [];
+            const leagueSelect = document.getElementById('league-select');
+            storedLeagues.forEach(function(leagueData) {
+                const option = document.createElement('option');
+                option.value = leagueData.name;
+                option.textContent = leagueData.name;
+                leagueSelect.appendChild(option);
+            });
+
+        leagueSelect.addEventListener('change', function () {
+            const selectedLeague = this.value;
+            const playerSelect = document.getElementById('player-select');
+            playerSelect.innerHTML = '<option value="">Select a Winner</option>';
+            const selectedLeagueData = storedLeagues.find(league => league.name === selectedLeague);
+            if (selectedLeagueData) {
+                selectedLeagueData.players.forEach(function(player) {
+                    const option = document.createElement('option');
+                    option.value = player.name;
+                    option.textContent = player.name;
+                    playerSelect.appendChild(option);
+                });
+            }
+        }); 
+
+        document.getElementById('submit-button').addEventListener('click', addWinner);
+        
+        function addWinner() {
+            const selectedPlayer = document.getElementById('player-select').value;
+            const selectedLeague = document.getElementById('league-select').value;
+            const selectedLeagueData = storedLeagues.find(league => league.name === selectedLeague);
+            if (selectedLeagueData) {
+                const playerIndex = selectedLeagueData.players.findIndex(player => player.name === selectedPlayer);
+                selectedLeagueData.players[playerIndex].wins += 1;
+                selectedLeagueData.games += 1;
+                localStorage.setItem('leagues', JSON.stringify(storedLeagues));
+                alert(`${selectedPlayer} has won and their win count has been updated.`);
+            }
+        };
+    });
+    </script>
 </body>
 </html>

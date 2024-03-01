@@ -34,20 +34,15 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // Retrieve league data from local storage
             const storedLeagues = JSON.parse(localStorage.getItem('leagues')) || [];
-            // Generate HTML for displaying league information
             storedLeagues.forEach(function(leagueData) {
                 const leagueBlock = document.createElement('div');
                 leagueBlock.classList.add('league-block');
                 leagueBlock.textContent = leagueData.name;
-                // Append league block to the container
                 document.getElementById('leagues-container').appendChild(leagueBlock);
-
-                // Add click event listener to league block
                 leagueBlock.addEventListener('click', function () {
-                    // Create alert with list of player names
-                    alert('Players: ' + leagueData.players.join(', ') + '\nGames Played: ' + leagueData.games);
+                    const playerNames = leagueData.players.map(player => player.name);
+                    alert('League: ' + leagueData.name + '\nGames Played: ' + leagueData.games + '\nPlayers:\n' + playerNames.join(', '));
                 });
             });
         });

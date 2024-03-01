@@ -13,7 +13,7 @@
 <body>
     <header>Game of Games</header>
     <nav class="nav">
-        <a href="League.html" class="nav__link--active">
+        <a href="League.html" class="nav__link">
             <span class="material-icons">view_list</span>
             <span class="nav__text">Leagues</span>
         </a>
@@ -47,17 +47,13 @@
         document.addEventListener('DOMContentLoaded', function () {
             const form = document.getElementById('league-form');
             form.addEventListener('submit', function (event) {
-                event.preventDefault(); // Prevent default form submission
-                // Gather form data
+                event.preventDefault(); 
                 const leagueName = document.getElementById('league-name').value;
                 const players = document.getElementById('players').value.split(',');
-                // Retrieve existing leagues from local storage
                 const storedLeagues = JSON.parse(localStorage.getItem('leagues')) || [];
-                // Add new league data
-                storedLeagues.push({ name: leagueName, players: players, games: 0 });
-                // Save updated leagues back to local storage
+                const playersWithWins = players.map(player => ({ name: player.trim(), wins: 0 }));
+                storedLeagues.push({ name: leagueName, players: playersWithWins, games: 0 });
                 localStorage.setItem('leagues', JSON.stringify(storedLeagues));
-                // Redirect to Leagues page
                 window.location.href = 'League.html';
             });
         });
