@@ -9,6 +9,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
     <header>Game of Games</header>
@@ -26,5 +28,74 @@
             <span class="nav__text">Stats</span>
         </a>
     </nav>
+
+    <div class="scontainer">
+        <div class="custom-select">
+            <select id="league-select">
+                <option value="">Select a League</option>
+                <!-- JavaScript magic-->
+            </select>
+        </div>
+        <canvas id="pie-chart" width="400" height="400"></canvas>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const storedLeagues = JSON.parse(localStorage.getItem('leagues')) || [];
+            const leagueSelect = document.getElementById('league-select');
+            storedLeagues.forEach(function(leagueData) {
+                const option = document.createElement('option');
+                option.value = leagueData.name;
+                option.textContent = leagueData.name;
+                leagueSelect.appendChild(option);
+            });
+
+            leagueSelect.addEventListener('change', function () {
+                const selectedLeague = this.value;
+                const selectedLeagueData = storedLeagues.find(league => league.name === selectedLeague);
+                if (selectedLeagueData && selectedLeagueData.games > 0) {
+                    // Calculate win percentages for players
+                    const players = selectedLeagueData.players;
+                    const totalGames = selectedLeagueData.games;
+                    const winPercentages = players.map(player => {
+                        const percentage = (player.wins / totalGames) * 100;
+                        return { player: player.name, percentage: percentage.toFixed(2) };
+                    });
+
+                    // Display pie chart
+                    displayPieChart(winPercentages);
+                } else {
+                    // Show message if no games have been played
+                    alert("No games have been played yet");
+                }
+            });
+
+            function displayPieChart(winPercentages) {
+                const labels = winPercentages.map(item => item.player);
+                const data = winPercentages.map(item => item.percentage);
+                const backgroundColors = ['#FF6384', '#36A2EB', '#FFCE56', '#8A2BE2', '#00FF00', '#FF00FF', '#1E90FF', '#FF8C00', '#DC143C', '#7FFF00'];
+                const ctx = document.getElementById('pie-chart').getContext('2d');
+                new Chart(ctx, {
+                    type: 'pie',
+                    data: {
+                        labels: labels,
+                        datasets: [{
+                            data: data,
+                            backgroundColor: backgroundColors,
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        title: {
+                            display: true,
+                            text: 'Win Percentages'
+                        }
+                    }
+                });
+            }
+        });
+    </script>
+
+
 </body>
 </html>
