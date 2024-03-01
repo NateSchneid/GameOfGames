@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>New League</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="nav.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>Game of Games</header>
+    <nav class="nav">
+        <a href="League.html" class="nav__link--active">
+            <span class="material-icons">view_list</span>
+            <span class="nav__text">Leagues</span>
+        </a>
+        <a href="newgame.html" class="nav__link">
+            <span class="material-icons">add_circle</span>
+            <span class="nav__text">New Game</span>
+        </a>
+        <a href="statistics.html" class="nav__link">
+            <span class="material-icons">analytics</span>
+            <span class="nav__text">Stats</span>
+        </a>
+    </nav>
+    <div class="nlcontainer">
+        <form id="league-form">
+            <label for="league-name">League Name:</label><br>
+            <input type="text" id="league-name" name="league-name"><br>
+            <label for="players">Players (comma separated):</label><br>
+            <input type="text" id="players" name="players"><br><br>
+            <button type="submit" onclick="League.html">Create League</button>
+        </form>
+        <button type="button" onclick="clearLeagues()">Clear Leagues</button>
+    </div>
+
+    <script>
+        function clearLeagues() {
+            // Clear all leagues from local storage
+            localStorage.removeItem('leagues');
+            alert('All saved leagues have been cleared.');
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            const form = document.getElementById('league-form');
+            form.addEventListener('submit', function (event) {
+                event.preventDefault(); // Prevent default form submission
+                // Gather form data
+                const leagueName = document.getElementById('league-name').value;
+                const players = document.getElementById('players').value.split(',');
+                // Retrieve existing leagues from local storage
+                const storedLeagues = JSON.parse(localStorage.getItem('leagues')) || [];
+                // Add new league data
+                storedLeagues.push({ name: leagueName, players: players });
+                // Save updated leagues back to local storage
+                localStorage.setItem('leagues', JSON.stringify(storedLeagues));
+                // Redirect to Leagues page
+                window.location.href = 'League.html';
+            });
+        });
+    </script>
+</body>
+</html>

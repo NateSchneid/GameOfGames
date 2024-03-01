@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Leagues</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="nav.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>Game of Games</header>
+    <nav class="nav">
+        <a href="League.html" class="nav__link--active">
+            <span class="material-icons">view_list</span>
+            <span class="nav__text">Leagues</span>
+        </a>
+        <a href="newgame.html" class="nav__link">
+            <span class="material-icons">add_circle</span>
+            <span class="nav__text">New Game</span>
+        </a>
+        <a href="statistics.html" class="nav__link">
+            <span class="material-icons">analytics</span>
+            <span class="nav__text">Stats</span>
+        </a>
+    </nav>
+    <a href="Newleague.html" class="add-league-button">
+        <span class="material-icons">add</span>
+    </a>
+
+    <div id="leagues-container"></div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Retrieve league data from local storage
+            const storedLeagues = JSON.parse(localStorage.getItem('leagues')) || [];
+            // Generate HTML for displaying league information
+            storedLeagues.forEach(function(leagueData) {
+                const leagueBlock = document.createElement('div');
+                leagueBlock.classList.add('league-block');
+                leagueBlock.textContent = leagueData.name;
+                // Append league block to the container
+                document.getElementById('leagues-container').appendChild(leagueBlock);
+
+                // Add click event listener to league block
+                leagueBlock.addEventListener('click', function () {
+                    // Create alert with list of player names
+                    alert('Players: ' + leagueData.players.join(', '));
+                });
+            });
+        });
+    </script>
+</body>
+</html>
